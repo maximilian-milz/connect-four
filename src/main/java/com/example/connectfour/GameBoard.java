@@ -6,14 +6,11 @@ package com.example.connectfour;
  * The bottom row is row 0, and the leftmost column is column 0.
  */
 public class GameBoard {
-    // Constants for board dimensions
     public static final int COLUMNS = 7;
     public static final int ROWS = 6;
 
-    // Empty cell character
     private static final char EMPTY_CELL = '.';
 
-    // The board grid
     private final char[][] grid;
 
     /**
@@ -58,7 +55,6 @@ public class GameBoard {
             return -1;
         }
 
-        // Find the lowest empty row in the column
         for (int row = 0; row < ROWS; row++) {
             if (grid[row][column] == EMPTY_CELL) {
                 grid[row][column] = symbol;
@@ -103,7 +99,6 @@ public class GameBoard {
     public void printBoard() {
         System.out.println("Current board:");
 
-        // Print the board from top to bottom
         for (int row = ROWS - 1; row >= 0; row--) {
             for (int col = 0; col < COLUMNS; col++) {
                 System.out.print(grid[row][col] + " ");
@@ -111,7 +106,6 @@ public class GameBoard {
             System.out.println();
         }
 
-        // Print column numbers
         System.out.println("1 2 3 4 5 6 7");
         System.out.println();
     }

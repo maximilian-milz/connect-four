@@ -16,21 +16,17 @@ public class ConnectFour {
     public static void main(String[] args) {
         System.out.println("Welcome to Connect Four!");
 
-        // Get player names
         Scanner scanner = new Scanner(System.in);
         String player1Name = getPlayerName(scanner, 1);
         String player2Name = getPlayerName(scanner, 2);
 
-        // Initialize game components
         GameBoard gameBoard = new GameBoard();
         Player player1 = new Player(player1Name, 'X');
         Player player2 = new Player(player2Name, 'O');
         GameLogic gameLogic = new GameLogic(gameBoard, player1, player2);
 
-        // Start the game
         gameLogic.startGame();
 
-        // Close the scanner (although GameLogic will also close it)
         scanner.close();
     }
 
@@ -45,7 +41,6 @@ public class ConnectFour {
         System.out.println("Enter name for Player " + playerNumber + " (default: Player " + playerNumber + "):");
         String name = scanner.nextLine().trim();
 
-        // Use default name if empty input
         if (name.isEmpty()) {
             name = "Player " + playerNumber;
             System.out.println("Using default name: " + name);

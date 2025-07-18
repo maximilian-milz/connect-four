@@ -37,56 +37,43 @@ public class GameLogic {
         boolean playAgain = true;
 
         while (playAgain) {
-            // Reset the board if this is a replay
             if (board.isFull() || hasDiscs()) {
                 board.reset();
             }
 
-            // Reset to player 1 for new game
             currentPlayer = player1;
 
-            // Display initial empty board
             board.printBoard();
 
             boolean gameOver = false;
 
-            // Main game loop
             while (!gameOver) {
-                // Get player's move
                 int column = getPlayerMove();
 
-                // Place the disc and get the row where it landed
-                int row = board.placeDisc(column, currentPlayer.getSymbol());
+                int row = board.placeDisc(column, currentPlayer.symbol());
 
-                // Display the updated board
                 board.printBoard();
 
-                // Check for win
                 if (checkWin(row, column)) {
-                    System.out.println(currentPlayer.getName() + " wins!");
-                    gameStats.recordWin(currentPlayer.getName());
+                    System.out.println(currentPlayer.name() + " wins!");
+                    gameStats.recordWin(currentPlayer.name());
                     gameOver = true;
                 } 
-                // Check for draw
                 else if (board.isFull()) {
                     System.out.println("The game is a draw!");
                     gameStats.recordDraw();
                     gameOver = true;
                 } 
-                // Switch players for next turn
                 else {
                     switchPlayer();
                 }
             }
 
-            // Display game statistics
             gameStats.printStats();
 
-            // Ask if players want to play again
             playAgain = askPlayAgain();
         }
 
-        // Close the scanner when players decide not to play again
         scanner.close();
     }
 
@@ -138,7 +125,7 @@ public class GameLogic {
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println(currentPlayer.getName() + " (" + currentPlayer.getSymbol() + "), choose a column (1-7):");
+            System.out.println(currentPlayer.name() + " (" + currentPlayer.symbol() + "), choose a column (1-7):");
 
             try {
                 String input = scanner.nextLine().trim();
@@ -175,19 +162,16 @@ public class GameLogic {
      * @return true if the current player has won, false otherwise
      */
     private boolean checkWin(int row, int column) {
-        char symbol = currentPlayer.getSymbol();
+        char symbol = currentPlayer.symbol();
 
-        // Check horizontal
         if (checkHorizontal(row, symbol)) {
             return true;
         }
 
-        // Check vertical
         if (checkVertical(column, symbol)) {
             return true;
         }
 
-        // Check diagonal (both directions)
         return checkDiagonal(row, column, symbol);
     }
 
